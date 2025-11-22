@@ -1,119 +1,94 @@
 from mpi4py import MPI
-import time
-import sys
+import numpy as np
 
+# Функція перевірки на непарність
 def odd(number):
-    if (number % 2) == 0:
-        return False
-    else :
-        return True
+    return number % 2 != 0
 
 def main():
     comm = MPI.COMM_WORLD
-    id = comm.Get_rank()
-    numProcesses = comm.Get_size()
-    myHostName = MPI.Get_processor_name()
+    rank = comm.Get_rank()
+    size = comm.Get_size()
+    name = MPI.Get_processor_name()
 
-    if numProcesses < 2 or odd(numProcesses):
-        if id == 0:
-            print("Error: Please run with an even number of processes.")
-        sys.exit(0)
+    # Перевірка, що кількість процесів парна
+    if size < 2 or odd(size):
+        if rank == 0:
+            print("Please run this program with a positive even number of processes.")
+        exit(0)
 
-    # Дані для відправки
-    sendValue = id
-    neighbor = id - 1 if odd(id) else id + 1
+    # Підготовка даних (використовуємо numpy, як у вашому прикладі на фото)
+    # rank - це число, яке ми надсилаємо
+    send_data = np.array([rank], dtype='i') 
+    recv_data = np.array([0], dtype='i')
 
-    # ==========================================
-    # 1. СИНХРОННИЙ РЕЖИМ (Synchronous - ssend)
-    # ==========================================
-    if id == 0:
-        print("\n--- MODE 1: SYNCHRONOUS (SSEND) ---")
-        print("Waiting for handshake...")
-    comm.Barrier() # Синхронізація перед початком етапу
-
-    # Логіка як у вашому шаблоні: Непарні шлють, Парні приймають
-    if odd(id):
-        # ssend заблокується, поки neighbor не викличе recv
-        comm.ssend(sendValue, dest=neighbor)
-        receivedValue = comm.recv(source=neighbor)
+    # Визначаємо сусіда
+    if odd(rank):
+        neighbor = rank - 1
     else:
-        receivedValue = comm.recv(source=neighbor)
-        comm.ssend(sendValue, dest=neighbor)
+        neighbor = rank + 1
 
-    print(f"[Sync] P{id} finished exchange.")
-    comm.Barrier() # Чекаємо завершення етапу всіма процесами
+    # === ЛОГІКА ОБМІНУ ===
 
-    # ==========================================
-    # 2. БУФЕРИЗОВАНИЙ РЕЖИМ (Buffered - bsend)
-    # ==========================================
-    if id == 0:
-        print("\n--- MODE 2: BUFFERED (BSEND) ---")
-        print("Allocating buffers...")
+    # Для простоти реалізуємо схему:
+    # Непарні: ВІДПРАВЛЯЮТЬ всіма способами -> потім ПРИЙМАЮТЬ всіма способами
+    # Парні:   ПРИЙМАЮТЬ всіма способами   -> потім ВІДПРАВЛЯЮТЬ всіма способами
+    # Це запобігає дедлокам і дозволяє Rsend працювати коректно (бо Recv вже викликаний).
 
-    # 1. Виділення та приєднання буфера
-    # Розмір: дані + службова інформація MPI
-    buf_size = 1024 + MPI.BSEND_OVERHEAD
-    buf = bytearray(buf_size)
-    MPI.Attach_buffer(buf)
+    if odd(rank):
+        # --- 1. ВІДПРАВКА (Send) ---
+        # Standard
+        comm.Send([send_data, MPI.INT], dest=neighbor, tag=0)
 
-    comm.Barrier()
+        # Buffered
+        buf = bytearray(MPI.BSEND_OVERHEAD + send_data.nbytes)
+        MPI.Attach_buffer(buf)
+        comm.Bsend([send_data, MPI.INT], dest=neighbor, tag=1)
+        MPI.Detach_buffer()
 
-    if odd(id):
-        # bsend копіює в buf і повертається миттєво
-        comm.bsend(sendValue, dest=neighbor)
-        receivedValue = comm.recv(source=neighbor)
+        # Synchronous
+        comm.Ssend([send_data, MPI.INT], dest=neighbor, tag=2)
+
+        # Ready (працює, бо парний процес вже чекає на Recv)
+        comm.Rsend([send_data, MPI.INT], dest=neighbor, tag=3)
+
+        print(f"Process {rank} finished ALL SENDS to {neighbor}")
+
+        # --- 2. ПРИЙОМ (Receive) ---
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=0) # Standard
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=1) # Buffered
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=2) # Sync
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=3) # Ready
+
+        print(f"Process {rank} finished ALL RECVS from {neighbor}. Last value: {recv_data[0]}")
+
     else:
-        receivedValue = comm.recv(source=neighbor)
-        comm.bsend(sendValue, dest=neighbor)
+        # --- 1. ПРИЙОМ (Receive) ---
+        # Парні процеси спочатку слухають, що робить їх готовими до Rsend від сусідів
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=0) # Standard
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=1) # Buffered
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=2) # Sync
+        comm.Recv([recv_data, MPI.INT], source=neighbor, tag=3) # Ready
 
-    # 2. Від'єднання буфера (гарантує, що дані пішли)
-    MPI.Detach_buffer()
-    print(f"[Buffered] P{id} finished exchange.")
-    comm.Barrier()
+        print(f"Process {rank} finished ALL RECVS from {neighbor}. Last value: {recv_data[0]}")
 
-    # ==========================================
-    # 3. РЕЖИМ ПО ГОТОВНОСТІ (Ready - rsend)
-    # ==========================================
-    if id == 0:
-        print("\n--- MODE 3: READY (RSEND) ---")
-        print("Ensuring receiver is ready before sending...")
+        # --- 2. ВІДПРАВКА (Send) ---
+        # Standard
+        comm.Send([send_data, MPI.INT], dest=neighbor, tag=0)
 
-    comm.Barrier()
+        # Buffered
+        buf = bytearray(MPI.BSEND_OVERHEAD + send_data.nbytes)
+        MPI.Attach_buffer(buf)
+        comm.Bsend([send_data, MPI.INT], dest=neighbor, tag=1)
+        MPI.Detach_buffer()
 
-    # Увага: Для rsend отримувач ОБОВ'ЯЗКОВО має вже чекати (recv).
-    # Ми використовуємо time.sleep(), щоб гарантувати порядок.
+        # Synchronous
+        comm.Ssend([send_data, MPI.INT], dest=neighbor, tag=2)
 
-    if odd(id):
-        # Крок 1: Непарний відправляє
-        # Чекаємо, щоб Парний точно встиг викликати recv
-        time.sleep(2.0) # Було 0.2, ставимо 2.0 для надійності
-        comm.rsend(sendValue, dest=neighbor)
+        # Ready
+        comm.Rsend([send_data, MPI.INT], dest=neighbor, tag=3)
 
-        # Крок 2: Непарний приймає
-        # Одразу стаємо на прийом, щоб Парний міг відправити нам
-        receivedValue = comm.recv(source=neighbor)
-    else:
-        # Одразу викликаємо recv -> стаємо "Ready"
-        receivedValue = comm.recv(source=neighbor)
-
-        # Крок 2: Парний відправляє
-        # Чекаємо, щоб Непарний встиг перейти до recv
-        time.sleep(2.0) # Було 0.2
-        comm.rsend(sendValue, dest=neighbor)
-
-
-    print(f"[Ready] P{id} finished exchange.")
-    comm.Barrier()
-
-    # Фінальний вивід (як у шаблоні)
-    if id == 0: print("\n--- RESULTS ---")
-    comm.Barrier()
-    time.sleep(0.1) # Щоб вивід не перемішався
-    print(
-        "Process {} of {} on {} | Final Recv: {}".format(
-            id, numProcesses, myHostName, receivedValue
-        )
-    )
+        print(f"Process {rank} finished ALL SENDS to {neighbor}")
 
 if __name__ == "__main__":
     main()
