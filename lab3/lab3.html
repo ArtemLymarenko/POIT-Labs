@@ -7511,7 +7511,200 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=6f295efe0f4cd18f">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f44e06a3ba9ff958">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>Виконав: Лимаренко Артем КН-51мп</p>
+<p><strong>Характеристики мого ПК</strong></p>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=55ad70b4db1a1bf0">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [30]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">%%writefile</span> mypc.py
+<span class="kn">import</span><span class="w"> </span><span class="nn">psutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">platform</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_size</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">"B"</span><span class="p">):</span>
+    <span class="n">factor</span> <span class="o">=</span> <span class="mi">1024</span>
+    <span class="k">for</span> <span class="n">unit</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">""</span><span class="p">,</span> <span class="s2">"K"</span><span class="p">,</span> <span class="s2">"M"</span><span class="p">,</span> <span class="s2">"G"</span><span class="p">,</span> <span class="s2">"T"</span><span class="p">,</span> <span class="s2">"P"</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="nb">bytes</span> <span class="o">&lt;</span> <span class="n">factor</span><span class="p">:</span>
+            <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="nb">bytes</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}{</span><span class="n">unit</span><span class="si">}{</span><span class="n">suffix</span><span class="si">}</span><span class="s2">"</span>
+        <span class="nb">bytes</span> <span class="o">/=</span> <span class="n">factor</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">system_info</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="s2">"Інформація про Систему"</span><span class="p">,</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">uname</span> <span class="o">=</span> <span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Система: </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">system</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Ім'я вузла (PC Name): </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">node</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Реліз: </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">release</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Версія: </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Архітектура: </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">machine</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Процесор (сімейство): </span><span class="si">{</span><span class="n">uname</span><span class="o">.</span><span class="n">processor</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cpu_info</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="s2">"Інформація про CPU"</span><span class="p">,</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Фізичні ядра: </span><span class="si">{</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Всього ядер (логічні): </span><span class="si">{</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">cpufreq</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_freq</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Максимальна частота: </span><span class="si">{</span><span class="n">cpufreq</span><span class="o">.</span><span class="n">max</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Мінімальна частота: </span><span class="si">{</span><span class="n">cpufreq</span><span class="o">.</span><span class="n">min</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Поточна частота: </span><span class="si">{</span><span class="n">cpufreq</span><span class="o">.</span><span class="n">current</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">Mhz"</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Не вдалося отримати частоту CPU (можливо, обмеження прав доступу або віртуалізація)"</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Завантаження CPU (загальне): </span><span class="si">{</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_percent</span><span class="p">()</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">memory_info</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="s2">"Інформація про Пам'ять (RAM)"</span><span class="p">,</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">svmem</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Всього: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">svmem</span><span class="o">.</span><span class="n">total</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Доступно: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">svmem</span><span class="o">.</span><span class="n">available</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Використано: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">svmem</span><span class="o">.</span><span class="n">used</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Відсоток використання: </span><span class="si">{</span><span class="n">svmem</span><span class="o">.</span><span class="n">percent</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">20</span><span class="p">,</span> <span class="s2">"SWAP (Файл підкачки)"</span><span class="p">,</span> <span class="s2">"-"</span><span class="o">*</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">swap</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">swap_memory</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Всього: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">total</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Вільне: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">free</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Використано: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">swap</span><span class="o">.</span><span class="n">used</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Відсоток використання: </span><span class="si">{</span><span class="n">swap</span><span class="o">.</span><span class="n">percent</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">disk_info</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">,</span> <span class="s2">"Інформація про Диски"</span><span class="p">,</span> <span class="s2">"="</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+    <span class="n">partitions</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_partitions</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">partition</span> <span class="ow">in</span> <span class="n">partitions</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"=== Диск: </span><span class="si">{</span><span class="n">partition</span><span class="o">.</span><span class="n">device</span><span class="si">}</span><span class="s2"> ==="</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Точка монтування: </span><span class="si">{</span><span class="n">partition</span><span class="o">.</span><span class="n">mountpoint</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Тип файлової системи: </span><span class="si">{</span><span class="n">partition</span><span class="o">.</span><span class="n">fstype</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">partition_usage</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">disk_usage</span><span class="p">(</span><span class="n">partition</span><span class="o">.</span><span class="n">mountpoint</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Всього місця: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">partition_usage</span><span class="o">.</span><span class="n">total</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Використано: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">partition_usage</span><span class="o">.</span><span class="n">used</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Вільне: </span><span class="si">{</span><span class="n">get_size</span><span class="p">(</span><span class="n">partition_usage</span><span class="o">.</span><span class="n">free</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"  Заповнено: </span><span class="si">{</span><span class="n">partition_usage</span><span class="o">.</span><span class="n">percent</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">PermissionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"FATAL"</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">system_info</span><span class="p">()</span>
+    <span class="n">cpu_info</span><span class="p">()</span>
+    <span class="n">memory_info</span><span class="p">()</span>
+    <span class="n">disk_info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Overwriting mypc.py
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=935c5ce0ab868fa6">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [31]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">!</span>python<span class="w"> </span>mypc.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>======================================== Інформація про Систему ========================================
+Система: Windows
+Ім'я вузла (PC Name): DESKTOP-L6FRMTM
+Реліз: 11
+Версія: 10.0.26100
+Архітектура: AMD64
+Процесор (сімейство): AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD
+
+======================================== Інформація про CPU ========================================
+Фізичні ядра: 6
+Всього ядер (логічні): 12
+Максимальна частота: 3600.00Mhz
+Мінімальна частота: 0.00Mhz
+Поточна частота: 3600.00Mhz
+Завантаження CPU (загальне): 34.5%
+
+======================================== Інформація про Пам'ять (RAM) ========================================
+Всього: 31.87GB
+Доступно: 18.60GB
+Використано: 13.27GB
+Відсоток використання: 41.6%
+
+-------------------- SWAP (Файл підкачки) --------------------
+Всього: 2.22GB
+Вільне: 2.02GB
+Використано: 205.82MB
+Відсоток використання: 9.1%
+
+======================================== Інформація про Диски ========================================
+=== Диск: C:\ ===
+  Точка монтування: C:\
+  Тип файлової системи: NTFS
+  Всього місця: 617.58GB
+  Використано: 371.01GB
+  Вільне: 246.56GB
+  Заповнено: 60.1%
+=== Диск: D:\ ===
+  Точка монтування: D:\
+  Тип файлової системи: NTFS
+  Всього місця: 894.24GB
+  Використано: 768.75GB
+  Вільне: 125.49GB
+  Заповнено: 86.0%
+=== Диск: E:\ ===
+  Точка монтування: E:\
+  Тип файлової системи: NTFS
+  Всього місця: 100.00MB
+  Використано: 32.73MB
+  Вільне: 67.27MB
+  Заповнено: 32.7%
+=== Диск: H:\ ===
+  Точка монтування: H:\
+  Тип файлової системи: NTFS
+  Всього місця: 421.68GB
+  Використано: 374.44GB
+  Вільне: 47.24GB
+  Заповнено: 88.8%
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=c21cebaee4de8788">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -8757,7 +8950,9 @@ worker 6 dying
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><strong>3</strong></p>
+<p><strong>3. Мною була обрана задача Dot Product.</strong></p>
+<p><img alt="image.png" src="data:image/png;base64,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"/></p>
+<p>У цій задачі реалізовано паралельне скалярне множення векторів.</p>
 </div>
 </div>
 </div>
@@ -8766,10 +8961,75 @@ worker 6 dying
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [65]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In [21]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython2"><pre><span></span> 
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">%%writefile</span> dot_product.py
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpi4py</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPI</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">comm</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">COMM_WORLD</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_rank</span><span class="p">()</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">Get_size</span><span class="p">()</span>
+
+    <span class="c1"># Параметри задачі</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">500000000</span>  <span class="c1"># Розмір векторів (має ділитися на кількість процесів)</span>
+
+    <span class="c1"># Перевірка на кратність</span>
+    <span class="k">if</span> <span class="n">N</span> <span class="o">%</span> <span class="n">size</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Error: Розмір вектора </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2"> не ділиться націло на </span><span class="si">{</span><span class="n">size</span><span class="si">}</span><span class="s2"> процесів."</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="n">local_n</span> <span class="o">=</span> <span class="n">N</span> <span class="o">//</span> <span class="n">size</span>  <span class="c1"># Кількість елементів на один процес</span>
+
+    <span class="c1"># 1. Ініціалізація даних (Тільки на Root)</span>
+    <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># Генеруємо вектори A і B (Техніка з п. 2.5 scatter_gather.py)</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Root: згенеровано вектори розміром </span><span class="si">{</span><span class="n">N</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">B</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Буфери для отримання частин векторів</span>
+    <span class="n">local_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">local_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+    <span class="n">local_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">local_n</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+    <span class="c1"># Синхронізація перед початком заміру часу</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Barrier</span><span class="p">()</span>
+    <span class="n">start_time</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">Wtime</span><span class="p">()</span>
+
+    <span class="c1"># 2. Розподіл даних (Scatter) - Техніка з п. 2.1</span>
+    <span class="c1"># Розсилаємо частини вектора A</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">local_A</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># Розсилаємо частини вектора B</span>
+    <span class="n">comm</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">local_B</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># 3. Локальні обчислення (Parallel Calculation)</span>
+    <span class="c1"># Кожен процес рахує скалярний добуток своєї частини</span>
+    <span class="c1"># local_dot = sum(a[i] * b[i])</span>
+    <span class="n">local_dot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">local_A</span><span class="p">,</span> <span class="n">local_B</span><span class="p">)</span>
+
+    <span class="c1"># 4. Збір результатів (Reduce) - Техніка з п. 2.0 (reduction.py)</span>
+    <span class="c1"># Сумуємо всі local_dot в одну змінну global_dot на процесі 0</span>
+    <span class="n">global_dot</span> <span class="o">=</span> <span class="n">comm</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">local_dot</span><span class="p">,</span> <span class="n">op</span><span class="o">=</span><span class="n">MPI</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">end_time</span> <span class="o">=</span> <span class="n">MPI</span><span class="o">.</span><span class="n">Wtime</span><span class="p">()</span>
+
+    <span class="c1"># 5. Вивід результату</span>
+    <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Результат (MPI): </span><span class="si">{</span><span class="n">global_dot</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Час виконання: </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.6f</span><span class="si">}</span><span class="s2"> сек."</span><span class="p">)</span>
+
+        <span class="c1"># Для перевірки (не для заміру часу) порахуємо послідовно</span>
+        <span class="c1"># serial_dot = np.dot(A, B)</span>
+        <span class="c1"># print(f"Перевірка (Serial): {serial_dot}")</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -8782,10 +9042,222 @@ worker 6 dying
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>MPI MxV complete
-Time: 0.05464673042297363 seconds
+<pre>Overwriting dot_product.py
 </pre>
 </div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3713fe18c5387f15">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [22]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">!</span>mpiexec<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>python<span class="w"> </span>dot_product.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Root: згенеровано вектори розміром 500000000
+Результат (MPI): 124999973.99506146
+Час виконання: 2.098665 сек.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=442e3977d1cb3b36">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [23]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">!</span>mpiexec<span class="w"> </span>-n<span class="w"> </span><span class="m">4</span><span class="w"> </span>python<span class="w"> </span>dot_product.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Root: згенеровано вектори розміром 500000000
+Результат (MPI): 125007076.51866552
+Час виконання: 2.220310 сек.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=609db352cfe9c0ce">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [25]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython2"><pre><span></span><span class="o">!</span>mpiexec<span class="w"> </span>-n<span class="w"> </span><span class="m">10</span><span class="w"> </span>python<span class="w"> </span>dot_product.py
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Root: згенеровано вектори розміром 500000000
+Результат (MPI): 125003635.48433726
+Час виконання: 2.313550 сек.
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=afa1dc50302af9d5">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>Опис реалізації програми для обчислення скалярного добутку векторів</strong></p>
+<p>Програмна реалізація задачі базується на моделі паралельного програмування SPMD (Single Program, Multiple Data) з використанням бібліотеки <code>mpi4py</code>. Алгоритм розроблено за шаблоном <strong>Scatter-Gather (Map-Reduce)</strong>, який передбачає декомпозицію вхідних даних, незалежну паралельну обробку та подальшу агрегацію результатів.</p>
+<p>На етапі ініціалізації програма створює комунікатор <code>MPI.COMM_WORLD</code>, визначаючи загальну кількість процесів (<code>size</code>) та унікальний ідентифікатор поточного процесу (<code>rank</code>). Задається розмірність векторів $N$ (наприклад, 50 000 000 елементів). Для забезпечення коректності розподілу даних виконується перевірка на кратність розміру вектора кількості процесів.</p>
+<p>Генерація вхідних даних відбувається централізовано лише на процесі з рангом 0 (Root). За допомогою бібліотеки <code>numpy</code> створюються два вектори $A$ та $B$ типу <code>float64</code>, заповнені випадковими числами. На інших процесах ці змінні ініціалізуються як <code>None</code> для економії пам'яті. Для прийому даних кожен процес виділяє локальні буфери <code>local_A</code> та <code>local_B</code> розміром $N/size$.</p>
+<p>Розподіл даних реалізовано за допомогою колективної операції <strong><code>comm.Scatter</code></strong>, описаної в теоретичних відомостях як метод розсилки даних від одного процесу до всіх інших за принципом «one-to-many». Функція автоматично розбиває глобальні масиви $A$ та $B$ на рівні частини та пересилає їх у локальні буфери кожного процесу.</p>
+<p>На етапі обчислень кожен процес незалежно виконує операцію скалярного добутку над своїми локальними частинами векторів (<code>local_A</code> та <code>local_B</code>) за допомогою функції <code>np.dot</code>. Результатом цієї операції є скалярне значення <code>local_dot</code>, що становить частину загальної суми.</p>
+<p>Збір та фінальна обробка результатів здійснюються за допомогою колективної операції <strong><code>comm.reduce</code></strong>. Вона збирає значення <code>local_dot</code> від усіх процесів та застосовує до них оператор підсумовування (<code>MPI.SUM</code>). Підсумкове значення <code>global_dot</code> зберігається лише на Root-процесі.</p>
+<p>Для оцінки ефективності розпаралелювання програма використовує функцію <code>MPI.Wtime()</code> для заміру часу виконання паралельної секції (від моменту перед розсилкою даних до завершення редукції). Результат обчислень та витрачений час виводяться на екран процесом з рангом 0.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d03a604fa0b4923c">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>3.2 Оцінка ефективності розподілення обчислень</strong></p>
+<h4 id="%D0%97%D0%B0%D0%BA%D0%BE%D0%BD-%D0%90%D0%BC%D0%B4%D0%B0%D0%BB%D0%B0">Закон Амдала<a class="anchor-link" href="#%D0%97%D0%B0%D0%BA%D0%BE%D0%BD-%D0%90%D0%BC%D0%B4%D0%B0%D0%BB%D0%B0">¶</a></h4><p>Аналітична оцінка ефективності паралельних обчислень базується на законі Амдала, який визначає теоретичну межу прискорення системи при збільшенні кількості обчислювальних вузлів. Згідно з цим законом, прискорення програми залежить від співвідношення послідовної та паралельної частин коду. Якщо ми припустимо, що операції ініціалізації та збору даних є суто послідовними (або комунікаційними витратами), а основні обчислення скалярного добутку ідеально розпаралелюються, теоретичне прискорення ($S$) для $P$ процесорів розраховується за формулою:</p>
+<p>$$S(P) = \frac{1}{\alpha + \frac{1 - \alpha}{P}}$$</p>
+<p>де:</p>
+<ul>
+<li>$\alpha$ — частка часу виконання послідовної частини програми (у нашому випадку це генерація масивів, <code>Scatter</code> та <code>Reduce</code>);</li>
+<li>$(1 - \alpha)$ — частка часу, яку можна розпаралелити (локальне обчислення <code>np.dot</code>);</li>
+<li>$P$ — кількість процесів.</li>
+</ul>
+<p>В ідеальних умовах, де обсяг даних не є критично великим, а комунікація миттєва ($\alpha \to 0$), прискорення мало б наближатися до лінійного, тобто $S(4) \approx 4$. Однак у реальних умовах $\alpha$ включає час на передачу даних по мережі або копіювання в пам'яті, що суттєво знижує теоретичну межу.</p>
+<h4 id="%D0%95%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0-%D0%BE%D1%86%D1%96%D0%BD%D0%BA%D0%B0">Експериментальна оцінка<a class="anchor-link" href="#%D0%95%D0%BA%D1%81%D0%BF%D0%B5%D1%80%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0-%D0%BE%D1%86%D1%96%D0%BD%D0%BA%D0%B0">¶</a></h4><p>Експериментальна оцінка проводилася шляхом вимірювання реального часу виконання програми (<code>T</code>) на різній кількості процесів за допомогою функції <code>MPI.Wtime()</code>. Реальне прискорення ($S_{real}$) розраховується як відношення часу виконання послідовної версії ($T_1$) до часу виконання паралельної версії ($T_P$):</p>
+<p>$$S_{real} = \frac{T_1}{T_P}$$</p>
+<p>Підставивши отримані експериментальні дані (для $N=500,000,000$), отримуємо такі результати:</p>
+<p><strong>Для 4 процесів:</strong>
+$$S_{real}(4) = \frac{2.098}{2.220} \approx 0.945 \quad (\text{Сповільнення})$$</p>
+<p><strong>Для 10 процесів:</strong>
+$$S_{real}(10) = \frac{2.098}{2.313} \approx 0.907 \quad (\text{Сповільнення})$$</p>
+<h4 id="%D0%92%D0%B8%D1%81%D0%BD%D0%BE%D0%B2%D0%BE%D0%BA:-%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7-%D0%BF%D1%80%D0%B8%D1%87%D0%B8%D0%BD-%D0%B2%D1%96%D0%B4%D1%81%D1%83%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%96-%D0%BF%D1%80%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B5%D0%BD%D0%BD%D1%8F">Висновок: Аналіз причин відсутності прискорення<a class="anchor-link" href="#%D0%92%D0%B8%D1%81%D0%BD%D0%BE%D0%B2%D0%BE%D0%BA:-%D0%90%D0%BD%D0%B0%D0%BB%D1%96%D0%B7-%D0%BF%D1%80%D0%B8%D1%87%D0%B8%D0%BD-%D0%B2%D1%96%D0%B4%D1%81%D1%83%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%96-%D0%BF%D1%80%D0%B8%D1%81%D0%BA%D0%BE%D1%80%D0%B5%D0%BD%D0%BD%D1%8F">¶</a></h4><p>За результатами експерименту встановлено, що зі збільшенням кількості процесів час виконання програми не зменшився, а зріс (ефективність $S &lt; 1$). Це явище пояснюється двома ключовими факторами, характерними для задач типу <strong>Memory Bound</strong> (обмежених пам'яттю) при запуску на одному фізичному вузлі (Shared Memory).</p>
+<p>По-перше, операція скалярного добутку є обчислювально легкою (виконує прості арифметичні дії), але вимагає прокачування величезних обсягів даних (у даному випадку близько 8 ГБ) через шину оперативної пам'яті. Оскільки всі запущені процеси конкурують за один і той самий канал доступу до пам'яті (Memory Bandwidth), пропускна здатність каналу насичується вже одним процесом. Додавання нових процесів лише створює чергу за даними, не прискорюючи обробку.</p>
+<p>По-друге, значний вплив мають накладні витрати на комунікацію (Communication Overhead). Операція <code>Scatter</code> змушена фізично копіювати частини масиву в адресний простір кожного процесу. Час, витрачений на копіювання гігабайтів даних між буферами процесів, перевищує час, який економиться завдяки паралельному виконанню арифметичних операцій.</p>
+<p>Таким чином, для задач із низькою обчислювальною складністю на елемент даних (як <code>dot_product</code>) та великим обсягом пам'яті, застосування моделі MPI на одній машині є неефективним через домінування комунікаційних витрат над обчисленнями.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=405cab12cfe8e03f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="%D0%9A%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%96-%D0%B7%D0%B0%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%BD%D1%8F">Контрольні запитання<a class="anchor-link" href="#%D0%9A%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C%D0%BD%D1%96-%D0%B7%D0%B0%D0%BF%D0%B8%D1%82%D0%B0%D0%BD%D0%BD%D1%8F">¶</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dccbe3e9e75206bd">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p><strong>1. Дайте визначення локальної та колективної операцій.</strong>
+Локальна операція — це операція, яка виконується окремим процесом незалежно від інших і завершення якої залежить лише від локальної активності цього процесу. Колективна операція — це операція, яку зобов'язані викликати всі процеси, що входять до складу певної групи (комунікатора), для виконання спільної дії, такої як передача даних або синхронізація.</p>
+<p><strong>2. Чи беруть участь в колективних операціях всі процеси додатки?</strong>
+Не обов'язково всі процеси програми. У колективній операції беруть участь усі процеси, що входять до <em>заданого комунікатора</em>, в рамках якого викликається ця функція. Якщо комунікатор охоплює лише частину процесів програми, то й участь беруть тільки вони.</p>
+<p><strong>3. Чи повинна бути викликана функція, відповідна колективної операції, кожним процесом, можливо, зі своїм набором параметрів?</strong>
+Так, функція, що реалізує колективну операцію, повинна бути викликана кожним процесом комунікатора. Набір параметрів має бути узгодженим, хоча деякі параметри можуть відрізнятися для різних процесів (наприклад, <code>root</code> передає буфер відправлення, а інші — ні).</p>
+<p><strong>4. У колективних операціях беруть участь всі процеси комунікатора?</strong>
+Так, це є обов'язковою умовою. Усі процеси, що належать до комунікатора, повинні увійти в колективний виклик, інакше виконання програми може заблокуватися.</p>
+<p><strong>5. Що таке кореневий процес?</strong>
+Кореневий процес (root) — це процес із визначеним рангом у комунікаторі, який відіграє особливу роль у колективній операції: він виступає джерелом даних при розсилці (наприклад, у <code>MPI_Bcast</code>, <code>MPI_Scatter</code>) або отримувачем результатів при зборі даних (наприклад, у <code>MPI_Reduce</code>, <code>MPI_Gather</code>).</p>
+<p><strong>6. Чи означає повернення процесу з функції, що реалізує колективну операцію, що операція завершена?</strong>
+Для блокуючих колективних операцій повернення з функції означає, що локальні буфери процесу можна безпечно використовувати (вони вже прочитані або записані). Однак це не завжди означає, що операція завершилася на всіх інших процесах, за винятком операцій синхронізації типу <code>MPI_Barrier</code>.</p>
+<p><strong>7. У чому перевага використання колективних операцій перед парними?</strong>
+Перевага полягає у простоті написання коду, кращій читабельності та можливості використання оптимізованих реалізацій алгоритмів обміну даними, які враховують архітектуру конкретної обчислювальної системи, що часто забезпечує вищу продуктивність порівняно з ручною реалізацією через <code>Send</code>/<code>Recv</code> .</p>
+<p><strong>8. Наведіть приклад некоректного використання колективних операцій, приводить до Дедлок.</strong>
+Дедлок (взаємне блокування) може виникнути, якщо не всі процеси комунікатора викликають колективну операцію (наприклад, один процес пропускає виклик через умову <code>if</code>), або якщо різні процеси викликають різні колективні функції, або вказують різних кореневих процесів (<code>root</code>) для однієї операції.</p>
+<p><strong>9. Чи можна використовувати як аргумент колективної функції інтеркоммунікатор?</strong>
+Так, стандарт MPI дозволяє використання інтеркомунікаторів для колективних операцій. У такому випадку операція відбувається між двома групами процесів, що з'єднані інтеркомунікатором.</p>
+<p><strong>10. Які колективні операції використовуються для синхронізації процесів?</strong>
+Оснвною операцією для явної синхронізації є <code>MPI_Barrier</code>. Вона блокує процеси, доки всі учасники комунікатора не викличуть цю функцію.</p>
+<p><strong>11. Чи означає виклик функції MPI_Barrier, що викликає процес блокується, поки всі процеси програми не викличуть її?</strong>
+Так, процес, що викликав <code>MPI_Barrier</code>, блокується і не продовжує виконання, доки всі інші процеси в даному комунікаторі також не увійдуть у цей виклик.</p>
+<p><strong>12. Чи можна в якості номера кореневого процесу в функції широкомовної передачі MPI_Bcast вказувати номер будь-якого процесу комунікатора?</strong>
+Так, кореневим процесом (<code>root</code>) може бути будь-який процес із коректним рангом у межах комунікатора, за умови, що всі процеси вказують однаковий номер <code>root</code>.</p>
+<p><strong>13. Чи означає повернення з функції MPI_Bcast, що вміст буфера обміну скопійовано в усі процеси?</strong>
+Повернення з функції означає, що на кореневому процесі буфер можна перевикористовувати, а на інших процесах — що дані отримані в локальний буфер. Це не гарантує одночасного завершення копіювання на всіх процесах глобально в один момент часу.</p>
+<p><strong>14. У якому порядку має повідомлення кореневої процес при виконанні операції складання даних MPI_Gather?</strong>
+Кореневий процес розташовує отримані дані у своєму буфері прийому в порядку зростання рангів процесів-відправників: дані від процесу 0, потім від процесу 1 і так далі.</p>
+<p><strong>15. Які з аргументів функції MPI_Gather не використовуються в процесах, які не є кореневими?</strong>
+У процесах, які не є кореневими, аргументи, що описують буфер прийому (<code>recvbuf</code>, <code>recvcount</code>, <code>recvtype</code>), не використовуються і можуть бути проігноровані (або передані як <code>None</code>/<code>0</code>).</p>
+<p><strong>16. Скільки повідомлень від кожного процесу може приймати кореневої процес при виконанні операції MPI_Gatherv?</strong>
+Кореневий процес приймає один блок даних (повідомлення) від кожного процесу комунікатора, включаючи самого себе. Розмір цих блоків може бути різним.</p>
+<p><strong>17. У чому полягає особливість розміщення даних в кореневому процесі при виконанні операції MPI_Gatherv?</strong>
+Особливість полягає в тому, що <code>MPI_Gatherv</code> дозволяє приймати блоки даних різного розміру від різних процесів і розміщувати їх у буфері кореневого процесу з довільними зміщеннями (displacements), що задаються спеціальним масивом.</p>
+<p><strong>18. Чи може початкова адреса буфера розсилки збігатися з адресою буфера процесу-одержувача при виконанні функції MPI_Scatter?</strong>
+У загальному випадку буфери відправлення та прийому не повинні перетинатися. Однак, якщо використовується спеціальний параметр <code>MPI_IN_PLACE</code>, то буфер прийому на кореневому процесі може бути тим самим, що й буфер відправлення (або ігноруватися), що дозволяє уникнути зайвого копіювання.</p>
+<p><strong>19. Чи дозволяється змінювати кількості даних, які надсилаються кожному процесу в функції MPI_Scatter? А в функції MPI_Scatterv?</strong>
+У функції <code>MPI_Scatter</code> кількість даних фіксована і однакова для кожного процесу (<code>sendcount</code>). У функції <code>MPI_Scatterv</code> дозволяється надсилати різну кількість даних кожному процесу, використовуючи масив <code>sendcounts</code>.</p>
+<p><strong>19 (дубль). У чому відмінність між двома викликами MPI_Scatter (...) і MPI_Bcast (...)?</strong>
+<code>MPI_Scatter</code> розділяє вхідний буфер на частини і надсилає <em>різні</em> частини кожному процесу (процес $i$ отримує $i$-ту частину). <code>MPI_Bcast</code> копіює <em>весь</em> вхідний буфер повністю і надсилає однакові дані всім процесам .</p>
+<p><strong>20. Чи буде різниця в результатах для кореневого процесу при використанні MPI_Gather і MPI_Allgather з однаковими параметрами?</strong>
+Для самого кореневого процесу вміст буфера прийому буде однаковим в обох випадках — він міститиме повний набір даних від усіх процесів. Різниця полягає в тому, що при <code>MPI_Allgather</code> цей результат отримають і всі інші процеси .</p>
+<p><strong>21. Скільки процесів отримують дані при використанні MPI_Allgather? А при використанні MPI_Allgatherv?</strong>
+При використанні обох функцій (<code>MPI_Allgather</code> та <code>MPI_Allgatherv</code>) дані отримують <em>всі</em> процеси комунікатора.</p>
+<p><strong>22. Яким набором посилок і прийомів (MPI_Send і MPI_Recv) можна замінити виклик функції MPI_Alltoall? А - MPI_Alltoallv?</strong>
+<code>MPI_Alltoall</code> можна замінити схемою, де кожен процес виконує $N$ посилок (<code>MPI_Send</code>) і $N$ прийомів (<code>MPI_Recv</code>), обмінюючись даними з кожним іншим процесом (всього $N^2$ повідомлень у системі). Для <code>MPI_Alltoallv</code> схема аналогічна, але розмір повідомлень у кожній парі <code>Send</code>/<code>Recv</code> може бути різним.</p>
+<p><strong>23. У якому порядку проводиться операція редукції над даними з різних процесів при виконанні функції MPI_Reduce?</strong>
+Порядок застосування операції редукції стандартом суворо не визначений, але зазвичай дані комбінуються відповідно до рангів процесів. Однак програміст повинен враховувати, що для операцій з плаваючою комою зміна порядку (асоціативність) може вплинути на результат через помилки округлення.</p>
+<p><strong>24. Гарантована чи однозначність результату в стандарті MPI?</strong>
+Ні, однозначність результату (побітова ідентичність) не гарантується, особливо для некомутативних операцій або операцій з плаваючою комою, оскільки порядок виконання операцій може залежати від реалізації бібліотеки MPI.</p>
+<p><strong>25. Які типи даних можна використовувати для операцій MPI_MINLOC і MPI_MAXLOC в операціях редукції?</strong>
+Для цих операцій використовуються спеціальні типи даних, що є парами "значення-індекс" (структури), наприклад: <code>MPI_FLOAT_INT</code>, <code>MPI_DOUBLE_INT</code>, <code>MPI_LONG_INT</code>, <code>MPI_2INT</code> тощо. Це дозволяє знаходити не тільки екстремальне значення, а й ранг процесу, де воно знаходиться.</p>
+<p><strong>26. Скільки процесів отримують дані при використанні MPI_Allreduce?</strong>
+При використанні <code>MPI_Allreduce</code> результат операції редукції отримують <em>всі</em> процеси комунікатора.</p>
+<p><strong>27. Запропонуйте варіант еквівалентної по результату виконання заміни операції MPI_Allreduce двома операціями: MPI_Reduce і MPI_Bcast.</strong>
+Еквівалентною заміною є виклик <code>MPI_Reduce</code> (збір та обчислення результату на кореневому процесі), за яким одразу слідує виклик <code>MPI_Bcast</code> (розсилка цього результату від кореневого процесу всім іншим).</p>
 </div>
 </div>
 </div>
